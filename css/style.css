@@ -45,13 +45,13 @@ header h1 {
 /*----------- Content --------------*/
 #mainContent {
 	padding: 10px;
-	padding-bottom: 40px !important; /* Height of the footer element */
+	padding-bottom: 50px !important; /* Height of the footer element */
 }
 
 /*----------- Footer --------------*/
 footer {
 	width: 100% !important;
-	height: 40px !important;
+	height: 50px !important;
 	position: absolute !important;
 	bottom: 0 !important;
 	left: 0 !important;
@@ -59,11 +59,24 @@ footer {
 	color: #fff;
 	border-top: 2px solid #08C594;
 }
+div#liscene p {
+	line-height: 25px;
+}
 div#liscene {
 	position: relative;
 	top: 10px;
 	text-align: center;
 }
+/*----------- Extras --------------*/
+#error404 {
+	text-align: center;
+}
+#error404  img {
+	display: block;
+	margin: auto;
+	width: 550px;
+}
+
 /* Booststrap Custom CSS
  -----------------------------
  -----------------------------------*/
