@@ -4,7 +4,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Main - Forest Mapping</title>
+		<title>Main - Forest Monitor Mapping</title>
 
 		<link rel="icon" type="image/png" href="img/favicon.PNG" />
 
@@ -27,6 +27,14 @@
 		<script src="bootstrap/html5shiv.min.js"></script>
 		<script src="bootstrap/respond.min.js"></script>
 		<![endif]-->
+
+		<!-- sharethis.com, sharing plugin -->
+		<script type="text/javascript">
+			var switchTo5x = true;
+		</script>
+		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+		<script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
+
 	</head>
 
 	<body>
@@ -37,7 +45,7 @@
 				<div class="container">
 					<div class="row">
 						<div>
-							<h1><i class="fa fa-tree fa-2x"></i>&nbsp;&nbsp;Forest Mapping</h1>
+							<h1><i class="fa fa-tree fa-2x"></i>&nbsp;&nbsp;Forest Monitor Mapping</h1>
 						</div>
 					</div><!--row -->
 				</div><!--container -->
@@ -59,13 +67,10 @@
 						<div class="collapse navbar-collapse" id="example-navbar-collapse">
 							<ul class="nav navbar-nav">
 								<li>
-									<a href="master.html">ABOUT</a>
+									<a href="features.html">FEATURES</a>
 								</li>
 								<li>
-									<a href="#">FEATURES</a>
-								</li>
-								<li>
-									<a href="#">CONTACT</a>
+									<a href="contact.html">CONTACT</a>
 								</li>
 							</ul>
 						</div>
@@ -76,6 +81,38 @@
 			<div id="mainContent">
 				<div class="container">
 					<div class="row">
+						<div class="ui two column middle aligned relaxed fitted stackable grid">
+							<div class="column">
+								<div style="position: relative;	top: 50px;" class="ui form segment">
+									<div class="field">
+										<label>Username</label>
+										<div class="ui left icon input">
+											<input type="text" placeholder="Username">
+											<i class="user icon"></i>
+										</div>
+									</div>
+									<div class="field">
+										<label>Password</label>
+										<div class="ui left icon input">
+											<input type="password" placeholder="Password">
+											<i class="lock icon"></i>
+										</div>
+									</div>
+									<div class="ui blue submit button">
+										Login
+									</div>
+								</div>
+							</div>
+							<div style="margin-left:90px" class="ui vertical divider">
+								Or
+							</div>
+							<div class="center aligned column">
+								<div style=" position: relative;  top: 60px;" class="huge green ui labeled icon button">
+									<i class="signup icon"></i>
+									Sign Up
+								</div>
+							</div>
+						</div>
 
 					</div><!-- row -->
 				</div><!-- container -->
@@ -94,6 +131,31 @@
 			</footer>
 
 		</div><!-- bodyWrapper -->
+
+		<!-- Share this plugin necesary codes -->
+		<script type="text/javascript">
+			stLight.options({
+				publisher : "a034abf0-d21c-4a43-97d4-9c84d36dc40c",
+				doNotHash : false,
+				doNotCopy : false,
+				hashAddressBar : false
+			});
+		</script>
+		<script>
+			var options = {
+				"publisher" : "a034abf0-d21c-4a43-97d4-9c84d36dc40c",
+				"position" : "left",
+				"ad" : {
+					"visible" : false,
+					"openDelay" : 5,
+					"closeDelay" : 0
+				},
+				"chicklets" : {
+					"items" : ["facebook", "twitter", "linkedin", "googleplus", "pinterest", "email"]
+				}
+			};
+			var st_hover_widget = new sharethis.widgets.hoverbuttons(options);
+		</script>
 
 		<!-- Angular JavaScript -->
 		<script src="js/angular.min.js"></script>

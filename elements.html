@@ -1,0 +1,263 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Main - Forest Mapping</title>
+
+		<link rel="icon" type="image/png" href="img/favicon.PNG" />
+
+		<!-- Main Styslesheet -->
+		<link rel="stylesheet" href="css/style.css" />
+		<!-- Bootstrap CSS -->
+		<link href="bootstrap/bootstrap.css" rel="stylesheet">
+		<!-- Font-Awesome Icons -->
+		<link href="font_awesome/css/font-awesome.css" rel="stylesheet">
+		<!-- Semantic CSS -->
+		<link href="semantic/dist/semantic.min.css" type="text/css" rel="stylesheet"/>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.address.js"></script>
+		<!-- Semantic JS -->
+		<script src="semantic/dist/semantic.min.js" type="text/javascript" ></script>
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		<script src="bootstrap/html5shiv.min.js"></script>
+		<script src="bootstrap/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div id="bodyWrapper">
+
+			<header>
+				<div class="container">
+					<div class="row">
+						<div>
+							<h1><i class="fa fa-tree fa-2x"></i>&nbsp;&nbsp;Forest Mapping</h1>
+						</div>
+					</div><!--row -->
+				</div><!--container -->
+			</header>
+
+			<nav  class="navbar navbar-default" role="navigation">
+				<div class="container">
+					<div class="row">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target="#example-navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html"><i style="color: rgb(21, 167, 129);"  class="fa fa-tree"></i></a>
+						</div>
+						<div class="collapse navbar-collapse" id="example-navbar-collapse">
+							<ul class="nav navbar-nav">
+								<li>
+									<a href="features.html">FEATURES</a>
+								</li>
+								<li>
+									<a href="contact.html">CONTACT</a>
+								</li>
+							</ul>
+						</div>
+					</div><!--row -->
+				</div><!--container -->
+			</nav>
+
+			<div id="mainContent">
+				<div class="container">
+					<div class="row">
+
+						<h2>TAB</h2>
+						<div class="ui top attached tabular menu">
+							<a class="active item" data-tab="first">First</a>
+							<a class="item" data-tab="second">Second</a>
+							<a class="item" data-tab="third">Third</a>
+						</div>
+						<div class="ui bottom attached active tab segment" data-tab="first">
+							First
+						</div>
+						<div class="ui bottom attached tab segment" data-tab="second">
+							Second
+						</div>
+						<div class="ui bottom attached tab segment" data-tab="third">
+							Third
+						</div>
+
+						<h2>ACCORDION</h2>
+						<div class="ui styled fluid accordion">
+							<div class="active title">
+								<i class="dropdown icon"></i>
+								What is a dog?
+							</div>
+							<div class="active content">
+								<p>
+									A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.
+								</p>
+							</div>
+							<div class="title">
+								<i class="dropdown icon"></i>
+								What kinds of dogs are there?
+							</div>
+							<div class="content">
+								<p>
+									There are many breeds of dogs. Each breed varies in size and temperament. Owners often select a breed of dog that they find to be compatible with their own lifestyle and desires from a companion.
+								</p>
+							</div>
+							<div class="title">
+								<i class="dropdown icon"></i>
+								How do you acquire a dog?
+							</div>
+							<div class="content">
+								<p>
+									Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.
+								</p>
+								<p>
+									A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps give a good home to a dog who may not find one so readily.
+								</p>
+							</div>
+						</div>
+
+						<h2>FORM</h2>
+						<div class="ui  form segment">
+							<div class="two fields">
+								<div class="field">
+									<label>First Name</label>
+									<input placeholder="First Name" type="text">
+								</div>
+								<div class="field">
+									<label>Last Name</label>
+									<input placeholder="Last Name" type="text">
+								</div>
+							</div>
+							<div class="field">
+								<label>Gender</label>
+								<select class="ui dropdown">
+									<option value="">Gender</option>
+									<option value="1">Male</option>
+									<option value="0">Female</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>Username</label>
+								<input placeholder="Username" type="text">
+							</div>
+							<div class="field">
+								<label>Password</label>
+								<input type="password">
+							</div>
+							<div class="field">
+								<label>Email</label>
+								<input placeholder="Email" type="email">
+							</div>
+							<div class="inline field">
+								<div class="ui checkbox">
+									<input type="checkbox">
+									<label>I agree to the terms and conditions</label>
+								</div>
+							</div>
+
+							<div class="ui teal submit button">
+								Submit
+							</div>
+						</div>
+
+						<h2>SEARCH</h2>
+						<div class="ui action left icon input">
+							<i class="search icon"></i>
+							<input type="text" placeholder="Search...">
+							<div class="ui teal button">
+								Search
+							</div>
+						</div>
+						<br>
+
+						<h2>TABLE</h2>
+						<table class="ui compact table">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Status</th>
+									<th>Notes</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>John</td>
+									<td>Approved</td>
+									<td>None</td>
+								</tr>
+								<tr>
+									<td>Jamie</td>
+									<td>Approved</td>
+									<td>Requires call</td>
+								</tr>
+								<tr>
+									<td>John</td>
+									<td>Approved</td>
+									<td>None</td>
+								</tr>
+								<tr>
+									<td>Jamie</td>
+									<td>Approved</td>
+									<td>Requires call</td>
+								</tr>
+								<tr>
+									<td>John</td>
+									<td>Approved</td>
+									<td>None</td>
+								</tr>
+								<tr>
+									<td>Jamie</td>
+									<td>Approved</td>
+									<td>Requires call</td>
+								</tr>
+								<tr>
+									<td>John</td>
+									<td>Approved</td>
+									<td>None</td>
+								</tr>
+								<tr>
+									<td>Jamie</td>
+									<td>Approved</td>
+									<td>Requires call</td>
+								</tr>
+							</tbody>
+						</table>
+						<br>
+					</div><!-- row -->
+				</div><!-- container -->
+			</div><!-- mainContent -->
+
+			<footer>
+				<div class="container">
+					<div class="row">
+						<div id="liscene">
+
+							<p>
+								Copyright &copy; 2015 by Forest Mapping. All Rights Reserved.
+
+							</p>
+						</div>
+					</div><!-- row -->
+				</div><!-- container -->
+			</footer>
+
+		</div><!-- bodyWrapper -->
+
+		<!-- Angular JavaScript -->
+		<script src="js/angular.min.js"></script>
+		<script src="js/angular-route.min.js"></script>
+		<!-- Main Script -->
+		<script src="js/mainScript.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="bootstrap/bootstrap.js"></script>
+
+	</body>
+</html>

@@ -4,7 +4,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Change - Forest Moitor Mapping</title>
+		<title>Country- Forest Monitor Mapping</title>
 
 		<link rel="icon" type="image/png" href="img/favicon.PNG" />
 
@@ -27,14 +27,52 @@
 		<script src="bootstrap/html5shiv.min.js"></script>
 		<script src="bootstrap/respond.min.js"></script>
 		<![endif]-->
-		
+
 		<!-- sharethis.com, sharing plugin -->
 		<script type="text/javascript">
 			var switchTo5x = true;
 		</script>
 		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 		<script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
-		
+
+		<!-- DataTables JS -->
+		<link rel="stylesheet" type="text/css" href="dataTables/jquery.dataTables.css">
+		<link rel="stylesheet" type="text/css" href="dataTables/dataTables.tableTools.css">
+
+		<script type="text/javascript" language="javascript" src="dataTables/jquery.dataTables.js"></script>
+		<script type="text/javascript" language="javascript" src="dataTables/dataTables.tableTools.js"></script>
+
+		<script type="text/javascript" language="javascript" class="init">
+			$(document).ready(function() {
+				$('#example').DataTable({
+					dom : 'T<"clear">lfrtip',
+					"ajax" : "data/dataThree.txt",
+					"columns" : [{
+						"data" : "CN"
+					}, {
+						"data" : "TL"
+					}, {
+						"data" : "TG"
+					}, {
+						"data" : "TL/TLA"
+					}, {
+						"data" : "TCL_25/Y_2000_TC_25"
+					}, {
+						"data" : "TCL_50/Y_2000_TC_50"
+					}, {
+						"data" : "TCL_75/Y_2000_TC_75"
+					}, {
+						"data" : "TG/Y_2000_TC-50"
+					}, {
+						"data" : "L_50+TG/Y_2000_TC_50"
+					}, {
+						"data" : "BLG"
+					}],
+					deferRender : true
+				});
+			});
+		</script>
+
 	</head>
 
 	<body>
@@ -45,7 +83,7 @@
 				<div class="container">
 					<div class="row">
 						<div>
-							<h1><i class="fa fa-tree fa-2x"></i>&nbsp;&nbsp;Forest Mapping</h1>
+							<h1><i class="fa fa-tree fa-2x"></i>&nbsp;&nbsp;Forest Monitor Mapping</h1>
 						</div>
 					</div><!--row -->
 				</div><!--container -->
@@ -81,6 +119,82 @@
 			<div id="mainContent">
 				<div class="container">
 					<div class="row">
+						<span><h2 class="h2Styled">Country tree cover extent, loss and gain summary statistics (km2), ranked by total loss.</h2>
+							<p style="display: block; text-align: center; font-size: 18px;"><a href="http://www.sciencemag.org/content/suppl/2013/11/14/342.6160.850.DC1/Hansen.SM.pdf"><i class="fa fa-database">&nbsp;Data Source: Sciencemag.org </i></span></a> </p>
+						<hr class="hrStyled">
+						<table id="example" class="display" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th>Country</th>
+									<th>Total
+									<br>
+									Loss (TL)</th>
+									<th>Total
+									<br>
+									Gain (TG)</th>
+									<th>TL/Total Land
+									<br>
+									Area</th>
+									<th>&gt;25% TL
+									<center>
+										:
+									</center>&gt;25% TC</th>
+									<th>&gt;50% TL
+									<center>
+										:
+									</center>50% TC</th>
+									<th>&gt;75% TL
+									<center>
+										:
+									</center>75% TC</th>
+									<th>&gt;TG
+									<center>
+										:
+									</center>50% TC</th>
+									<th>&gt;50% TL + TG
+									<center>
+										:
+									</center>&gt;50% TC/</th>
+									<th>TG:TL</th>
+								</tr>
+							</thead>
+
+							<tfoot>
+								<tr>
+									<th>Country</th>
+									<th>Total
+									<br>
+									Loss (TL)</th>
+									<th>Total
+									<br>
+									Gain (TG)</th>
+									<th>TL/Total Land
+									<br>
+									Area</th>
+									<th>&gt;25% TL
+									<center>
+										:
+									</center>&gt;25% TC</th>
+									<th>&gt;50% TL
+									<center>
+										:
+									</center>50% TC</th>
+									<th>&gt;75% TL
+									<center>
+										:
+									</center>75% TC</th>
+									<th>&gt;TG
+									<center>
+										:
+									</center>50% TC</th>
+									<th>&gt;50% TL + TG
+									<center>
+										:
+									</center>&gt;50% TC/</th>
+									<th>TG:TL</th>
+								</tr>
+							</tfoot>
+						</table>
 
 					</div><!-- row -->
 				</div><!-- container -->
@@ -99,7 +213,7 @@
 			</footer>
 
 		</div><!-- bodyWrapper -->
-		
+
 		<!-- Share this plugin necesary codes -->
 		<script type="text/javascript">
 			stLight.options({
