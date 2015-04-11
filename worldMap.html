@@ -1,0 +1,1123 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Nepal - Forest Moitor Mapping</title>
+
+		<link rel="icon" type="image/png" href="img/favicon.PNG" />
+
+		<!-- Main Styslesheet -->
+		<link rel="stylesheet" href="css/style.css" />
+		<!-- Bootstrap CSS -->
+		<link href="bootstrap/bootstrap.css" rel="stylesheet">
+		<!-- Font-Awesome Icons -->
+		<link href="font_awesome/css/font-awesome.css" rel="stylesheet">
+		<!-- Semantic CSS -->
+		<link href="semantic/dist/semantic.min.css" type="text/css" rel="stylesheet"/>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.address.js"></script>
+		<!-- Semantic JS -->
+		<script src="semantic/dist/semantic.min.js" type="text/javascript" ></script>
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		<script src="bootstrap/html5shiv.min.js"></script>
+		<script src="bootstrap/respond.min.js"></script>
+		<![endif]-->
+
+		<!-- sharethis.com, sharing plugin -->
+		<script type="text/javascript">
+			var switchTo5x = true;
+		</script>
+		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+		<script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
+
+		<!-- worldMap -->
+		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<script src="http://d3js.org/topojson.v1.min.js"></script>
+		<script src="http://datamaps.github.io/scripts/datamaps.world.min.js"></script>
+	</head>
+
+	<body>
+		<div id="bodyWrapper">
+
+			<header>
+				<div class="container">
+					<div class="row">
+						<div>
+							<h1><i class="fa fa-tree fa-2x"></i>&nbsp;&nbsp;Forest Monitor Mapping</h1>
+						</div>
+					</div><!--row -->
+				</div><!--container -->
+			</header>
+
+			<nav  class="navbar navbar-default" role="navigation">
+				<div class="container">
+					<div class="row">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target="#example-navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html"><i style="color: rgb(21, 167, 129);"  class="fa fa-tree"></i></a>
+						</div>
+						<div class="collapse navbar-collapse" id="example-navbar-collapse">
+							<ul class="nav navbar-nav">
+								<li>
+									<a href="features.html">FEATURES</a>
+								</li>
+								<li>
+									<a href="contact.html">CONTACT</a>
+								</li>
+							</ul>
+						</div>
+					</div><!--row -->
+				</div><!--container -->
+			</nav>
+
+			<div id="mainContent">
+				<div class="container">
+					<div class="row">
+						<span><h2 class="h2Styled">All the data repesented are data collected by world bank from year 1990 to 2010.</h2>
+							<p style="display: block; text-align: center; font-size: 18px;">
+								<a href="http://www.sciencemag.org/content/suppl/2013/11/14/342.6160.850.DC1/Hansen.SM.pdf"><i class="fa fa-database">&nbsp;Data Source: Sciencemag.org </i>
+						</span></a> </p>
+						<hr class="hrStyled">
+						<h3 style="
+						margin: 0;
+						color: rgb(250, 176, 55);
+						border-bottom: 2px solid #7CDDC3;
+						width: 30%;
+						padding-bottom: 5px;
+						">Click throght country for detail information.</h3>
+
+						<div class="panel-content" id="container" style="position: relative; top: 20px;   width: auto; height: 500px"></div>
+						<!--	<div id="go"></div>-->
+
+					</div><!-- row -->
+				</div><!-- container -->
+			</div><!-- mainContent -->
+
+			<footer>
+				<div class="container">
+					<div class="row">
+						<div id="liscene">
+							<p>
+								Copyright &copy; 2015 by Forest Mapping. All Rights Reserved.
+							</p>
+						</div>
+					</div><!-- row -->
+				</div><!-- container -->
+			</footer>
+
+		</div><!-- bodyWrapper -->
+
+		<!-- Share this plugin necesary codes -->
+		<script type="text/javascript">
+			stLight.options({
+				publisher : "a034abf0-d21c-4a43-97d4-9c84d36dc40c",
+				doNotHash : false,
+				doNotCopy : false,
+				hashAddressBar : false
+			});
+		</script>
+		<script>
+			var options = {
+				"publisher" : "a034abf0-d21c-4a43-97d4-9c84d36dc40c",
+				"position" : "left",
+				"ad" : {
+					"visible" : false,
+					"openDelay" : 5,
+					"closeDelay" : 0
+				},
+				"chicklets" : {
+					"items" : ["facebook", "twitter", "linkedin", "googleplus", "pinterest", "email"]
+				}
+			};
+			var st_hover_widget = new sharethis.widgets.hoverbuttons(options);
+		</script>
+
+		<!-- Angular JavaScript -->
+		<script src="js/angular.min.js"></script>
+		<script src="js/angular-route.min.js"></script>
+		<!-- Main Script -->
+		<script src="js/mainScript.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="bootstrap/bootstrap.js"></script>
+
+	</body>
+</html>
+<script>
+	var map = new Datamap({
+		element : document.getElementById("container"),
+		geographyConfig : {
+			//	highlightBorderColor: '#000000',
+			popupTemplate : function(geography, data) {
+				if (!data)
+					return;
+				//IF no data is present, nothing will be displayed in the hover
+				return '<div class="hoverinfo"><strong>' + '<table class="table-example" style="width:300px"><tr><td>Country:</td><td>' + data.name + '</td></tr><tr><td>Capital:</td><td>' + data.Capital + '</td></tr><tr><td>Area:</td><td>' + data.Area + '</td></tr><tr><td>Forest Area:</td><td>' + data.forestArea + '</td></tr><tr><td>Deforestation Rate</td><td>' + data.deforstationRate + '</td></tr></table>' + '</div>'
+			},
+			// 	borderColor:'#444444',
+			//	highlightBorderWidth: 2
+		},
+		done : function(datamap) {
+			datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+				//console.log(d3.event.pageY)
+				if (geography.properties.name == "Nepal")
+					location.href = "nepalMap.html";
+			});
+		},
+
+		data : {
+			"NPL" : {
+				"name" : "Nepal",
+				"id" : "NPL",
+				"fillKey" : "redColor",
+				"Capital" : "kathmandu",
+				"Area" : "1,47,181 sq Km",
+				"forestArea" : 1234,
+				"deforstationRate" : "1%"
+			},
+			"AFG" : {
+				"name" : "Afghanistan",
+				"id" : "AFG",
+				"fillKey" : "defaultFill"
+			},
+			"AGO" : {
+				"name" : "Angola",
+				"id" : "AGO",
+				"fillKey" : "defaultFill"
+			},
+			"ALB" : {
+				"name" : "Albania",
+				"id" : "ALB",
+				"fillKey" : "defaultFill"
+			},
+			"ARE" : {
+				"name" : "United Arab Emirates",
+				"id" : "ARE",
+				"fillKey" : "defaultFill"
+			},
+			"ARG" : {
+				"name" : "Argentina",
+				"id" : "ARG",
+				"fillKey" : "defaultFill"
+			},
+			"ARM" : {
+				"name" : "Armenia",
+				"id" : "ARM",
+				"fillKey" : "defaultFill"
+			},
+			"ATA" : {
+				"name" : "Antarctica",
+				"id" : "ATA",
+				"fillKey" : "defaultFill"
+			},
+			"ATF" : {
+				"name" : "French Southern and Antarctic Lands",
+				"id" : "ATF",
+				"fillKey" : "defaultFill"
+			},
+			"AUS" : {
+				"name" : "Australia",
+				"id" : "AUS",
+				"fillKey" : "defaultFill"
+			},
+			"AUT" : {
+				"name" : "Austria",
+				"id" : "AUT",
+				"fillKey" : "defaultFill"
+			},
+			"AZE" : {
+				"name" : "Azerbaijan",
+				"id" : "AZE",
+				"fillKey" : "defaultFill"
+			},
+			"BDI" : {
+				"name" : "Burundi",
+				"id" : "BDI",
+				"fillKey" : "defaultFill"
+			},
+			"BEL" : {
+				"name" : "Belgium",
+				"id" : "BEL",
+				"fillKey" : "defaultFill"
+			},
+			"BEN" : {
+				"name" : "Benin",
+				"id" : "BEN",
+				"fillKey" : "defaultFill"
+			},
+			"BFA" : {
+				"name" : "Burkina Faso",
+				"id" : "BFA",
+				"fillKey" : "defaultFill"
+			},
+			"BGD" : {
+				"name" : "Bangladesh",
+				"id" : "BGD",
+				"fillKey" : "defaultFill",
+				"Capital" : "Dhaka",
+				"Area" : "130,170 sq km",
+				"forestArea" : "8,710",
+				"deforstationRate" : "0.17% per year"
+			},
+			"BGR" : {
+				"name" : "Bulgaria",
+				"id" : "BGR",
+				"fillKey" : "defaultFill"
+			},
+			"BHS" : {
+				"name" : "The Bahamas",
+				"id" : "BHS",
+				"fillKey" : "defaultFill"
+			},
+			"BIH" : {
+				"name" : "Bosnia and Herzegovina",
+				"id" : "BIH",
+				"fillKey" : "defaultFill"
+			},
+			"BLR" : {
+				"name" : "Belarus",
+				"id" : "BLR",
+				"fillKey" : "defaultFill"
+			},
+			"BLZ" : {
+				"name" : "Belize",
+				"id" : "BLZ",
+				"fillKey" : "defaultFill"
+			},
+			"BOL" : {
+				"name" : "Bolivia",
+				"id" : "BOL",
+				"fillKey" : "defaultFill"
+			},
+			"BRA" : {
+				"name" : "Brazil",
+				"id" : "BRA",
+				"fillKey" : "defaultFill"
+			},
+			"BRN" : {
+				"name" : "Brunei",
+				"id" : "BRN",
+				"fillKey" : "defaultFill"
+			},
+			"BTN" : {
+				"name" : "Bhutan",
+				"id" : "BTN",
+				"fillKey" : "defaultFill",
+				"Capital" : "Thimpu",
+				"Area" : "38,117 sq km",
+				"forestArea" : "24,764",
+				"deforstationRate" : "0.35% per year"
+			},
+			"BWA" : {
+				"name" : "Botswana",
+				"id" : "BWA",
+				"fillKey" : "defaultFill"
+			},
+			"CAF" : {
+				"name" : "Central African Republic",
+				"id" : "CAF",
+				"fillKey" : "defaultFill"
+			},
+			"CAN" : {
+				"name" : "Canada",
+				"id" : "CAN",
+				"fillKey" : "defaultFill"
+			},
+			"CHE" : {
+				"name" : "Switzerland",
+				"id" : "CHE",
+				"fillKey" : "defaultFill"
+			},
+			"CHL" : {
+				"name" : "Chile",
+				"id" : "CHL",
+				"fillKey" : "defaultFill"
+			},
+			"CHN" : {
+				"name" : "China",
+				"id" : "CHN",
+				"fillKey" : "defaultFill",
+				"Capital" : "Bejing",
+				"Area" : "98,388,211 sq km",
+				"forestArea" : "1,821,000",
+				"deforstationRate" : "1.58% per year"
+			},
+			"CIV" : {
+				"name" : "Ivory Coast",
+				"id" : "CIV",
+				"fillKey" : "defaultFill"
+			},
+			"CMR" : {
+				"name" : "Cameroon",
+				"id" : "CMR",
+				"fillKey" : "defaultFill"
+			},
+			"COD" : {
+				"name" : "Democratic Republic of the Congo",
+				"id" : "COD",
+				"fillKey" : "defaultFill"
+			},
+			"COG" : {
+				"name" : "Republic of the Congo",
+				"id" : "COG",
+				"fillKey" : "defaultFill"
+			},
+			"COL" : {
+				"name" : "Colombia",
+				"id" : "COL",
+				"fillKey" : "defaultFill"
+			},
+			"CRI" : {
+				"name" : "Costa Rica",
+				"id" : "CRI",
+				"fillKey" : "defaultFill"
+			},
+			"CUB" : {
+				"name" : "Cuba",
+				"id" : "CUB",
+				"fillKey" : "defaultFill"
+			},
+			"-99" : {
+				"name" : "Northern Cyprus",
+				"id" : "-99",
+				"fillKey" : "defaultFill"
+			},
+			"CYP" : {
+				"name" : "Cyprus",
+				"id" : "CYP",
+				"fillKey" : "defaultFill"
+			},
+			"CZE" : {
+				"name" : "Czech Republic",
+				"id" : "CZE",
+				"fillKey" : "defaultFill"
+			},
+			"DEU" : {
+				"name" : "Germany",
+				"id" : "DEU",
+				"fillKey" : "defaultFill"
+			},
+			"DJI" : {
+				"name" : "Djibouti",
+				"id" : "DJI",
+				"fillKey" : "defaultFill"
+			},
+			"DNK" : {
+				"name" : "Denmark",
+				"id" : "DNK",
+				"fillKey" : "defaultFill"
+			},
+			"DOM" : {
+				"name" : "Dominican Republic",
+				"id" : "DOM",
+				"fillKey" : "defaultFill"
+			},
+			"DZA" : {
+				"name" : "Algeria",
+				"id" : "DZA",
+				"fillKey" : "defaultFill"
+			},
+			"ECU" : {
+				"name" : "Ecuador",
+				"id" : "ECU",
+				"fillKey" : "defaultFill"
+			},
+			"EGY" : {
+				"name" : "Egypt",
+				"id" : "EGY",
+				"fillKey" : "defaultFill"
+			},
+			"ERI" : {
+				"name" : "Eritrea",
+				"id" : "ERI",
+				"fillKey" : "defaultFill"
+			},
+			"ESP" : {
+				"name" : "Spain",
+				"id" : "ESP",
+				"fillKey" : "defaultFill"
+			},
+			"EST" : {
+				"name" : "Estonia",
+				"id" : "EST",
+				"fillKey" : "defaultFill"
+			},
+			"ETH" : {
+				"name" : "Ethiopia",
+				"id" : "ETH",
+				"fillKey" : "defaultFill"
+			},
+			"FIN" : {
+				"name" : "Finland",
+				"id" : "FIN",
+				"fillKey" : "defaultFill"
+			},
+			"FJI" : {
+				"name" : "Fiji",
+				"id" : "FJI",
+				"fillKey" : "defaultFill"
+			},
+			"FLK" : {
+				"name" : "Falkland Islands",
+				"id" : "FLK",
+				"fillKey" : "defaultFill"
+			},
+			"FRA" : {
+				"name" : "France",
+				"id" : "FRA",
+				"fillKey" : "defaultFill"
+			},
+			"GUF" : {
+				"name" : "French Guiana",
+				"id" : "GUF",
+				"fillKey" : "defaultFill"
+			},
+			"GAB" : {
+				"name" : "Gabon",
+				"id" : "GAB",
+				"fillKey" : "defaultFill"
+			},
+			"GBR" : {
+				"name" : "United Kingdom",
+				"id" : "GBR",
+				"fillKey" : "defaultFill"
+			},
+			"GEO" : {
+				"name" : "Georgia",
+				"id" : "GEO",
+				"fillKey" : "defaultFill"
+			},
+			"GHA" : {
+				"name" : "Ghana",
+				"id" : "GHA",
+				"fillKey" : "defaultFill"
+			},
+			"GIN" : {
+				"name" : "Guinea",
+				"id" : "GIN",
+				"fillKey" : "defaultFill"
+			},
+			"GMB" : {
+				"name" : "Gambia",
+				"id" : "GMB",
+				"fillKey" : "defaultFill"
+			},
+			"GNB" : {
+				"name" : "Guinea Bissau",
+				"id" : "GNB",
+				"fillKey" : "defaultFill"
+			},
+			"GNQ" : {
+				"name" : "Equatorial Guinea",
+				"id" : "GNQ",
+				"fillKey" : "defaultFill"
+			},
+			"GRC" : {
+				"name" : "Greece",
+				"id" : "GRC",
+				"fillKey" : "defaultFill"
+			},
+			"GRL" : {
+				"name" : "Greenland",
+				"id" : "GRL",
+				"fillKey" : "defaultFill"
+			},
+			"GTM" : {
+				"name" : "Guatemala",
+				"id" : "GTM",
+				"fillKey" : "defaultFill"
+			},
+			"GUY" : {
+				"name" : "Guyana",
+				"id" : "GUY",
+				"fillKey" : "defaultFill"
+			},
+			"HND" : {
+				"name" : "Honduras",
+				"id" : "HND",
+				"fillKey" : "defaultFill"
+			},
+			"HRV" : {
+				"name" : "Croatia",
+				"id" : "HRV",
+				"fillKey" : "defaultFill"
+			},
+			"HTI" : {
+				"name" : "Haiti",
+				"id" : "HTI",
+				"fillKey" : "defaultFill"
+			},
+			"HUN" : {
+				"name" : "Hungary",
+				"id" : "HUN",
+				"fillKey" : "defaultFill"
+			},
+			"IDN" : {
+				"name" : "Indonesia",
+				"id" : "IDN",
+				"fillKey" : "defaultFill"
+			},
+			"IND" : {
+				"name" : "India",
+				"id" : "IND",
+				"fillKey" : "defaultFill",
+				"Capital" : "New Delhi",
+				"Area" : "2,973,190 sq km",
+				"forestArea" : "778,424",
+				"deforstationRate" : "0.35% per year"
+			},
+			"IRL" : {
+				"name" : "Ireland",
+				"id" : "IRL",
+				"fillKey" : "defaultFill"
+			},
+			"IRN" : {
+				"name" : "Iran",
+				"id" : "IRN",
+				"fillKey" : "defaultFill"
+			},
+			"IRQ" : {
+				"name" : "Iraq",
+				"id" : "IRQ",
+				"fillKey" : "defaultFill"
+			},
+			"ISL" : {
+				"name" : "Iceland",
+				"id" : "ISL",
+				"fillKey" : "defaultFill"
+			},
+			"ISR" : {
+				"name" : "Israel",
+				"id" : "ISR",
+				"fillKey" : "defaultFill"
+			},
+			"ITA" : {
+				"name" : "Italy",
+				"id" : "ITA",
+				"fillKey" : "defaultFill"
+			},
+			"JAM" : {
+				"name" : "Jamaica",
+				"id" : "JAM",
+				"fillKey" : "defaultFill"
+			},
+			"JOR" : {
+				"name" : "Jordan",
+				"id" : "JOR",
+				"fillKey" : "defaultFill"
+			},
+			"JPN" : {
+				"name" : "Japan",
+				"id" : "JPN",
+				"fillKey" : "defaultFill",
+				"Capital" : "Tokyo",
+				"Area" : "364,560 sq km",
+				"forestArea" : "253,203",
+				"deforstationRate" : "0.01% per year"
+			},
+			"KAZ" : {
+				"name" : "Kazakhstan",
+				"id" : "KAZ",
+				"fillKey" : "defaultFill",
+				"Capital" : "Astana",
+				"Area" : "2,724,900 sq km",
+				"forestArea" : "54,498",
+				"deforstationRate" : "0.17% per year"
+			},
+			"KEN" : {
+				"name" : "Kenya",
+				"id" : "KEN",
+				"fillKey" : "defaultFill"
+			},
+			"KGZ" : {
+				"name" : "Kyrgyzstan",
+				"id" : "KGZ",
+				"fillKey" : "defaultFill"
+			},
+			"KHM" : {
+				"name" : "Cambodia",
+				"id" : "KHM",
+				"fillKey" : "defaultFill"
+			},
+			"KOR" : {
+				"name" : "South Korea",
+				"id" : "KOR",
+				"fillKey" : "defaultFill"
+			},
+			"-99" : {
+				"name" : "Kosovo",
+				"id" : "-99",
+				"fillKey" : "defaultFill"
+			},
+			"KWT" : {
+				"name" : "Kuwait",
+				"id" : "KWT",
+				"fillKey" : "defaultFill"
+			},
+			"LAO" : {
+				"name" : "Laos",
+				"id" : "LAO",
+				"fillKey" : "defaultFill"
+			},
+			"LBN" : {
+				"name" : "Lebanon",
+				"id" : "LBN",
+				"fillKey" : "defaultFill"
+			},
+			"LBR" : {
+				"name" : "Liberia",
+				"id" : "LBR",
+				"fillKey" : "defaultFill"
+			},
+			"LBY" : {
+				"name" : "Libya",
+				"id" : "LBY",
+				"fillKey" : "defaultFill"
+			},
+			"LKA" : {
+				"name" : "Sri Lanka",
+				"id" : "LKA",
+				"fillKey" : "defaultFill"
+			},
+			"LSO" : {
+				"name" : "Lesotho",
+				"id" : "LSO",
+				"fillKey" : "defaultFill"
+			},
+			"LTU" : {
+				"name" : "Lithuania",
+				"id" : "LTU",
+				"fillKey" : "defaultFill"
+			},
+			"LUX" : {
+				"name" : "Luxembourg",
+				"id" : "LUX",
+				"fillKey" : "defaultFill"
+			},
+			"LVA" : {
+				"name" : "Latvia",
+				"id" : "LVA",
+				"fillKey" : "defaultFill"
+			},
+			"MAR" : {
+				"name" : "Morocco",
+				"id" : "MAR",
+				"fillKey" : "defaultFill"
+			},
+			"MDA" : {
+				"name" : "Moldova",
+				"id" : "MDA",
+				"fillKey" : "defaultFill"
+			},
+			"MDG" : {
+				"name" : "Madagascar",
+				"id" : "MDG",
+				"fillKey" : "defaultFill"
+			},
+			"MEX" : {
+				"name" : "Mexico",
+				"id" : "MEX",
+				"fillKey" : "defaultFill"
+			},
+			"MKD" : {
+				"name" : "Macedonia",
+				"id" : "MKD",
+				"fillKey" : "defaultFill"
+			},
+			"MLI" : {
+				"name" : "Mali",
+				"id" : "MLI",
+				"fillKey" : "defaultFill"
+			},
+			"MMR" : {
+				"name" : "Myanmar",
+				"id" : "MMR",
+				"fillKey" : "defaultFill",
+				"Capital" : "Naypyidaw",
+				"Area" : "653,290 sq km",
+				"forestArea" : "430,560",
+				"deforstationRate" : "0.95% per year"
+			},
+			"MNE" : {
+				"name" : "Montenegro",
+				"id" : "MNE",
+				"fillKey" : "defaultFill"
+			},
+			"MNG" : {
+				"name" : "Mongolia",
+				"id" : "MNG",
+				"fillKey" : "defaultFill",
+				"Capital" : "Ulan Bator",
+				"Area" : "1553560 sq km",
+				"forestArea" : "102,520",
+				"deforstationRate" : "0.65% per year"
+			},
+			"MOZ" : {
+				"name" : "Mozambique",
+				"id" : "MOZ",
+				"fillKey" : "defaultFill"
+			},
+			"MRT" : {
+				"name" : "Mauritania",
+				"id" : "MRT",
+				"fillKey" : "defaultFill"
+			},
+			"MWI" : {
+				"name" : "Malawi",
+				"id" : "MWI",
+				"fillKey" : "defaultFill"
+			},
+			"MYS" : {
+				"name" : "Malaysia",
+				"id" : "MYS",
+				"fillKey" : "defaultFill"
+			},
+			"NAM" : {
+				"name" : "Namibia",
+				"id" : "NAM",
+				"fillKey" : "defaultFill"
+			},
+			"NCL" : {
+				"name" : "New Caledonia",
+				"id" : "NCL",
+				"fillKey" : "defaultFill"
+			},
+			"NER" : {
+				"name" : "Niger",
+				"id" : "NER",
+				"fillKey" : "defaultFill"
+			},
+			"NGA" : {
+				"name" : "Nigeria",
+				"id" : "NGA",
+				"fillKey" : "defaultFill"
+			},
+			"NIC" : {
+				"name" : "Nicaragua",
+				"id" : "NIC",
+				"fillKey" : "defaultFill"
+			},
+			"NLD" : {
+				"name" : "Netherlands",
+				"id" : "NLD",
+				"fillKey" : "defaultFill"
+			},
+			"NOR" : {
+				"name" : "Norway",
+				"id" : "NOR",
+				"fillKey" : "defaultFill"
+			},
+			//"NPL":{"name":"Nepal","id":"NPL","fillKey":"defaultFill"},
+			"NZL" : {
+				"name" : "New Zealand",
+				"id" : "NZL",
+				"fillKey" : "defaultFill"
+			},
+			"OMN" : {
+				"name" : "Oman",
+				"id" : "OMN",
+				"fillKey" : "defaultFill"
+			},
+			"PAK" : {
+				"name" : "Pakistan",
+				"id" : "PAK",
+				"fillKey" : "defaultFill"
+			},
+			"PAN" : {
+				"name" : "Panama",
+				"id" : "PAN",
+				"fillKey" : "defaultFill"
+			},
+			"PER" : {
+				"name" : "Peru",
+				"id" : "PER",
+				"fillKey" : "defaultFill"
+			},
+			"PHL" : {
+				"name" : "Philippines",
+				"id" : "PHL",
+				"fillKey" : "defaultFill"
+			},
+			"PNG" : {
+				"name" : "Papua New Guinea",
+				"id" : "PNG",
+				"fillKey" : "defaultFill"
+			},
+			"POL" : {
+				"name" : "Poland",
+				"id" : "POL",
+				"fillKey" : "defaultFill"
+			},
+			"PRI" : {
+				"name" : "Puerto Rico",
+				"id" : "PRI",
+				"fillKey" : "defaultFill"
+			},
+			"PRK" : {
+				"name" : "North Korea",
+				"id" : "PRK",
+				"fillKey" : "defaultFill"
+			},
+			"PRT" : {
+				"name" : "Portugal",
+				"id" : "PRT",
+				"fillKey" : "defaultFill"
+			},
+			"PRY" : {
+				"name" : "Paraguay",
+				"id" : "PRY",
+				"fillKey" : "defaultFill"
+			},
+			"QAT" : {
+				"name" : "Qatar",
+				"id" : "QAT",
+				"fillKey" : "defaultFill"
+			},
+			"ROU" : {
+				"name" : "Romania",
+				"id" : "ROU",
+				"fillKey" : "defaultFill"
+			},
+			"RUS" : {
+				"name" : "Russia",
+				"id" : "RUS",
+				"fillKey" : "defaultFill"
+			},
+			"RWA" : {
+				"name" : "Rwanda",
+				"id" : "RWA",
+				"fillKey" : "defaultFill"
+			},
+			"ESH" : {
+				"name" : "Western Sahara",
+				"id" : "ESH",
+				"fillKey" : "defaultFill"
+			},
+			"SAU" : {
+				"name" : "Saudi Arabia",
+				"id" : "SAU",
+				"fillKey" : "defaultFill"
+			},
+			"SDN" : {
+				"name" : "Sudan",
+				"id" : "SDN",
+				"fillKey" : "defaultFill"
+			},
+			"SSD" : {
+				"name" : "South Sudan",
+				"id" : "SSD",
+				"fillKey" : "defaultFill"
+			},
+			"SEN" : {
+				"name" : "Senegal",
+				"id" : "SEN",
+				"fillKey" : "defaultFill"
+			},
+			"SLB" : {
+				"name" : "Solomon Islands",
+				"id" : "SLB",
+				"fillKey" : "defaultFill"
+			},
+			"SLE" : {
+				"name" : "Sierra Leone",
+				"id" : "SLE",
+				"fillKey" : "defaultFill"
+			},
+			"SLV" : {
+				"name" : "El Salvador",
+				"id" : "SLV",
+				"fillKey" : "defaultFill"
+			},
+			"-99" : {
+				"name" : "Somaliland",
+				"id" : "-99",
+				"fillKey" : "defaultFill"
+			},
+			"SOM" : {
+				"name" : "Somalia",
+				"id" : "SOM",
+				"fillKey" : "defaultFill"
+			},
+			"SRB" : {
+				"name" : "Republic of Serbia",
+				"id" : "SRB",
+				"fillKey" : "defaultFill"
+			},
+			"SUR" : {
+				"name" : "Suriname",
+				"id" : "SUR",
+				"fillKey" : "defaultFill"
+			},
+			"SVK" : {
+				"name" : "Slovakia",
+				"id" : "SVK",
+				"fillKey" : "defaultFill"
+			},
+			"SVN" : {
+				"name" : "Slovenia",
+				"id" : "SVN",
+				"fillKey" : "defaultFill"
+			},
+			"SWE" : {
+				"name" : "Sweden",
+				"id" : "SWE",
+				"fillKey" : "defaultFill"
+			},
+			"SWZ" : {
+				"name" : "Swaziland",
+				"id" : "SWZ",
+				"fillKey" : "defaultFill"
+			},
+			"SYR" : {
+				"name" : "Syria",
+				"id" : "SYR",
+				"fillKey" : "defaultFill"
+			},
+			"TCD" : {
+				"name" : "Chad",
+				"id" : "TCD",
+				"fillKey" : "defaultFill"
+			},
+			"TGO" : {
+				"name" : "Togo",
+				"id" : "TGO",
+				"fillKey" : "defaultFill"
+			},
+			"THA" : {
+				"name" : "Thailand",
+				"id" : "THA",
+				"fillKey" : "defaultFill",
+				"Capital" : "Bankok",
+				"Area" : "510,890 aq km",
+				"forestArea" : "147,620",
+				"deforstationRate" : "0.15% per year"
+			},
+			"TJK" : {
+				"name" : "Tajikistan",
+				"id" : "TJK",
+				"fillKey" : "defaultFill"
+			},
+			"TKM" : {
+				"name" : "Turkmenistan",
+				"id" : "TKM",
+				"fillKey" : "defaultFill"
+			},
+			"TLS" : {
+				"name" : "East Timor",
+				"id" : "TLS",
+				"fillKey" : "defaultFill"
+			},
+			"TTO" : {
+				"name" : "Trinidad and Tobago",
+				"id" : "TTO",
+				"fillKey" : "defaultFill"
+			},
+			"TUN" : {
+				"name" : "Tunisia",
+				"id" : "TUN",
+				"fillKey" : "defaultFill"
+			},
+			"TUR" : {
+				"name" : "Turkey",
+				"id" : "TUR",
+				"fillKey" : "defaultFill"
+			},
+			"TWN" : {
+				"name" : "Taiwan",
+				"id" : "TWN",
+				"fillKey" : "defaultFill"
+			},
+			"TZA" : {
+				"name" : "United Republic of Tanzania",
+				"id" : "TZA",
+				"fillKey" : "defaultFill"
+			},
+			"UGA" : {
+				"name" : "Uganda",
+				"id" : "UGA",
+				"fillKey" : "defaultFill"
+			},
+			"UKR" : {
+				"name" : "Ukraine",
+				"id" : "UKR",
+				"fillKey" : "defaultFill"
+			},
+			"URY" : {
+				"name" : "Uruguay",
+				"id" : "URY",
+				"fillKey" : "defaultFill"
+			},
+			"UZB" : {
+				"name" : "Uzbekistan",
+				"id" : "UZB",
+				"fillKey" : "defaultFill"
+			},
+			"VEN" : {
+				"name" : "Venezuela",
+				"id" : "VEN",
+				"fillKey" : "defaultFill"
+			},
+			"VNM" : {
+				"name" : "Vietnam",
+				"id" : "VNM",
+				"fillKey" : "defaultFill"
+			},
+			"VUT" : {
+				"name" : "Vanuatu",
+				"id" : "VUT",
+				"fillKey" : "defaultFill"
+			},
+			"PSE" : {
+				"name" : "West Bank",
+				"id" : "PSE",
+				"fillKey" : "defaultFill"
+			},
+			"YEM" : {
+				"name" : "Yemen",
+				"id" : "YEM",
+				"fillKey" : "defaultFill"
+			},
+			"ZAF" : {
+				"name" : "South Africa",
+				"id" : "ZAF",
+				"fillKey" : "defaultFill"
+			},
+			"ZMB" : {
+				"name" : "Zambia",
+				"id" : "ZMB",
+				"fillKey" : "defaultFill"
+			},
+			"ZWE" : {
+				"name" : "Zimbabwe",
+				"id" : "ZWE",
+				"fillKey" : "defaultFill"
+			}
+		},
+		fills : {
+			// 'pinkColor': '#ff99ff',
+			// 'orangeColor': '#ff6600',
+			'redColor' : '#ff0000',
+			// 'greenColor': '#00cc00',
+			// 'grayColor': '#cccccc',
+			// 'yellowColor': '#ffcc00',
+			//'whiteColor': '#ffffff',
+			// 'neutralColor': '#eeeeee',
+			defaultFill : 'green'
+		}
+	});
+
+</script>
+
+</body>
+</html>
