@@ -27,14 +27,107 @@
 		<script src="bootstrap/html5shiv.min.js"></script>
 		<script src="bootstrap/respond.min.js"></script>
 		<![endif]-->
-		
+
 		<!-- sharethis.com, sharing plugin -->
 		<script type="text/javascript">
 			var switchTo5x = true;
 		</script>
 		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 		<script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
-		
+
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript">
+			google.load('visualization', '1', {
+				'packages' : ['table', 'map']
+			});
+			//corechart removed//
+			google.setOnLoadCallback(initialize);
+
+			function initialize() {
+				// The URL of the spreadsheet to source data from.
+				var query = new google.visualization.Query('https://spreadsheets.google.com/pub?key=pCQbetd-CptF0r8qmCOlZGg');
+				query.send(draw);
+			}
+
+			function draw(response) {
+				if (response.isError()) {
+					alert('Error in query');
+				}
+
+				var ticketsData = response.getDataTable();
+
+				var geoData = google.visualization.arrayToDataTable([['Lat', 'Lon', 'District', 'Total Population', 'Water Coverage %', 'Sanitation Coverage %'], [26.98, 87.33, 'Dhankuta', 194274, 76.42, 48.64], [27.7, 85.33, 'Kathmandu', 1432290, 93.2, 93.77], [28.26, 83.97, 'Pokhara', 112345, 85.2, 85.2], [28.6, 81.63, 'Birendranagar', 123456, 75.23, 45.34], [29.26, 80.93, 'Dipayal', 111234, 75.43, 50.4]]);
+
+				var geoView = new google.visualization.DataView(geoData);
+				geoView.setColumns([0, 1]);
+
+				var table = new google.visualization.Table(document.getElementById('table_div'));
+				table.draw(geoData, {
+					showRowNumber : false
+				});
+
+				var map = new google.visualization.Map(document.getElementById('map_div'));
+				map.draw(geoView, {
+					showTip : true
+				});
+
+				// Set a 'select' event listener for the table.
+				// When the table is selected, we set the selection on the map.
+				google.visualization.events.addListener(table, 'select', function() {
+					map.setSelection(table.getSelection());
+				});
+
+				// Set a 'select' event listener for the map.
+				// When the map is selected, we set the selection on the table.
+				google.visualization.events.addListener(map, 'select', function() {
+					table.setSelection(map.getSelection());
+				});
+			}
+		</script>
+
+		<style>
+			div#map_div {
+				width: 100%;
+				height: 100%;
+				position: relative;
+				overflow: hidden;
+				transform: translateZ(0px) translateZ(0px);
+				text-align: center;
+				background-color: rgb(229, 227, 223);
+			}
+			.gm-style {
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				overflow: hidden;
+				width: 100%;
+				height: 100%;
+				z-index: 0;
+			}
+			tr, td {
+				padding: 10px;
+				font-size: 16px;
+			}
+			div#mapping {
+				width: 100%;
+				display: block;
+				float: left;
+				height: 500px;
+			}
+			table.google-visualization-table-table {
+				width: 100%;
+			}
+			td.google-visualization-table-td.google-visualization-table-td-number {
+				padding: 5px;
+			}
+			tr.google-visualization-table-tr-head th {
+				padding: 5px;
+			}
+			.google-visualization-table.content {
+				height: 100%;
+			}
+		</style>
+
 	</head>
 
 	<body>
@@ -45,7 +138,7 @@
 				<div class="container">
 					<div class="row">
 						<div>
-							<h1><i class="fa fa-tree fa-2x"></i>&nbsp;&nbsp;Forest Mapping</h1>
+							<h1><i class="fa fa-tree fa-2x"></i>&nbsp;&nbsp;Forest Monitor Mapping</h1>
 						</div>
 					</div><!--row -->
 				</div><!--container -->
@@ -82,6 +175,26 @@
 				<div class="container">
 					<div class="row">
 
+						<span><h2 class="h2Styled">Climate domain tree cover extent, loss and gain summary statistics (km2), ranked by total loss.</h2>
+							<p style="display: block; text-align: center; font-size: 18px;">
+								<a href="http://www.sciencemag.org/content/suppl/2013/11/14/342.6160.850.DC1/Hansen.SM.pdf"><i class="fa fa-database">&nbsp;Data Source: Sciencemag.org </i>
+						</span></a> </p>
+						<hr class="hrStyled">
+
+						<div style="width: 100%;">
+							<div id="mapping">
+								<div id="map_div"></div>
+								<h5 style="text-align: center; font-weight: bold">Regional Map Representation</h5>
+							</div>
+						</div>
+
+						<table align="center">
+							<tr valign="top">
+								<td style="width: 50%;"><div id="table_div"></div></td>
+							</tr>
+
+						</table>
+
 					</div><!-- row -->
 				</div><!-- container -->
 			</div><!-- mainContent -->
@@ -99,7 +212,7 @@
 			</footer>
 
 		</div><!-- bodyWrapper -->
-		
+
 		<!-- Share this plugin necesary codes -->
 		<script type="text/javascript">
 			stLight.options({
