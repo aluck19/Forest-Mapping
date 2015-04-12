@@ -56,14 +56,12 @@
 
 				var ticketsData = response.getDataTable();
 
-				var geoData = google.visualization.arrayToDataTable(
-					[['Lat', 'Lon','Development Region', 'Soil Erosion', 'Chemical degradation', 'Physical Degradation', 'Fuel consumption', 'Encroached forest area'], 
-				[26.98, 87.33,'Eastern', 8407, 294, 6088, 60.9, 14632], 
-				[27.7, 85.33,'Central', 13808, 869, 5164, 50.3, 8705], 
-				[28.26, 83.97,'Western', 1.77, 6135, 193, 2189, 13367], 
-				[28.6, 81.63,'Mid-Western', 1.47, 3791, 129, 1294, 4036], 
-				[29.26, 80.93,'Far-Western', 3.82, 5030, 447, 2833, 29516]]);
-						
+				var geoData = google.visualization.arrayToDataTable([['Lat', 'Lon', 'Development Region', 'Total Area (ha)', 'Soil Erosion', 'Chemical degradation', 'Physical Degradation', 'Fuel consumption', 'Encroached forest area'],
+					 [26.98, 87.33, 'Eastern',755178, 8407, 294, 6088, 11834, 14632],
+				  	[27.7, 85.33, 'Central', 716861, 13808, 869, 5164, 7089, 8705],
+				  	 [28.26, 83.97, 'Western', 482547, 6135, 193, 2189, 12189, 13367], 
+				   	[28.6, 81.63, 'Mid-Western',353624, 3791, 129, 1293, 11294, 4036], 
+				   	[29.26, 80.93, 'Far-Western', 217430,5030, 447, 2833, 9833, 29516]]);
 
 				var geoView = new google.visualization.DataView(geoData);
 				geoView.setColumns([0, 1]);
@@ -107,12 +105,14 @@
 			function drawChart() {
 
 				// Create the data table.
-				var data = new google.visualization.arrayToDataTable([['Development Region', 'Soil Erosion', 'Chemical degradation', 'Physical Degradation', 'Fuel consumption', 'Encroached forest area'], 
-				['Eastern', 8407, 294, 6088, 60.9, 14632], 
-				['Central', 13808, 869, 5164, 50.3, 8705], 
-				['Western', 1.77, 6135, 193, 2189, 13367], 
-				['Mid-Western', 1.47, 3791, 129, 1294, 4036], 
-				['Far-Western', 3.82, 5030, 447, 2833, 29516]]);
+				var data = new google.visualization.arrayToDataTable([
+					['Development Region', 'Soil Erosion', 'Chemical degradation', 'Physical Degradation', 'Fuel consumption', 'Encroached forest area'], 
+					['Eastern', 8407, 294, 6088, 11834, 14632],
+					 ['Central', 13808, 869, 5164, 7089, 8705], 
+					 ['Western', 6135, 193, 2189, 12189, 13367], 
+					 ['Mid-Western', 3791,129, 1294, 11294, 4036], 
+					 ['Far-Western', 5030, 447, 2833, 9833, 29516]]
+					 );
 
 				var options = {
 					chart : {
@@ -225,9 +225,9 @@
 				<div class="container">
 					<div class="row">
 
-						<span><h2 class="h2Styled">Climate domain tree cover extent, loss and gain summary statistics (km2), ranked by total loss.</h2>
+						<span><h2 class="h2Styled">Causes of Deforestation - According to Development Region</h2>
 							<p style="display: block; text-align: center; font-size: 18px;">
-								<a href="http://www.sciencemag.org/content/suppl/2013/11/14/342.6160.850.DC1/Hansen.SM.pdf"><i class="fa fa-database">&nbsp;Data Source: Sciencemag.org </i>
+								<a href="http://www.sciencemag.org/content/suppl/2013/11/14/342.6160.850.DC1/Hansen.SM.pdf"><i class="fa fa-database">&nbsp;Data Source: ENVIRONMENT STATISTICS OF NEPAL 2013, Central Bureau of Statistics </i>
 						</span></a> </p>
 						<hr class="hrStyled">
 
@@ -306,9 +306,7 @@
 			var st_hover_widget = new sharethis.widgets.hoverbuttons(options);
 		</script>
 
-		<!-- Angular JavaScript -->
-		<script src="js/angular.min.js"></script>
-		<script src="js/angular-route.min.js"></script>
+		
 		<!-- Main Script -->
 		<script src="js/mainScript.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->

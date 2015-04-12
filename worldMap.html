@@ -36,7 +36,7 @@
 		<script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
 
 		<!-- worldMap -->
-		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	
 		<script src="http://d3js.org/d3.v3.min.js"></script>
 		<script src="http://d3js.org/topojson.v1.min.js"></script>
 		<script src="http://datamaps.github.io/scripts/datamaps.world.min.js"></script>
@@ -85,18 +85,26 @@
 			<div id="mainContent">
 				<div class="container">
 					<div class="row">
-						<span><h2 class="h2Styled">All the data repesented are data collected by world bank from year 1990 to 2010.</h2>
+						<span><h2 class="h2Styled">Data represented are data collected from Wikepedia, World Bank and Mongabay.</h2>
 							<p style="display: block; text-align: center; font-size: 18px;">
-								<a href="http://www.sciencemag.org/content/suppl/2013/11/14/342.6160.850.DC1/Hansen.SM.pdf"><i class="fa fa-database">&nbsp;Data Source: Sciencemag.org </i>
-						</span></a> </p>
+								<i class="fa fa-database"> </i><a href="http://en.wikipedia.org/wiki/List_of_countries_by_forest_area">&nbsp;Wikipedia
+						</span></a>,
+						<a href="http://data.worldbank.org/indicator/AG.LND.TOTL.K2">&nbsp;Data.WorldBank
+						</span></a>
+						,
+						<a href="http://rainforests.mongabay.com/deforestation/2000/Nepal.htm">&nbsp;Mongabay
+						</span></a>
+						
+						
+						 </p>
 						<hr class="hrStyled">
 						<h3 style="
 						margin: 0;
 						color: rgb(250, 176, 55);
 						border-bottom: 2px solid #7CDDC3;
-						width: 30%;
+						width: 50%;
 						padding-bottom: 5px;
-						">Click throght country for detail information.</h3>
+						"><i class="fa fa-globe fa-2x"></i> Click through country for detail information.</h3>
 
 						<div class="panel-content" id="container" style="position: relative; top: 20px;   width: auto; height: 500px"></div>
 						<!--	<div id="go"></div>-->
@@ -144,9 +152,7 @@
 			var st_hover_widget = new sharethis.widgets.hoverbuttons(options);
 		</script>
 
-		<!-- Angular JavaScript -->
-		<script src="js/angular.min.js"></script>
-		<script src="js/angular-route.min.js"></script>
+		
 		<!-- Main Script -->
 		<script src="js/mainScript.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -183,8 +189,8 @@
 				"fillKey" : "redColor",
 				"Capital" : "kathmandu",
 				"Area" : "1,47,181 sq Km",
-				"forestArea" : 1234,
-				"deforstationRate" : "1%"
+				"forestArea" : "39000",
+				"deforstationRate" : "1.23% per year"
 			},
 			"AFG" : {
 				"name" : "Afghanistan",
@@ -1107,13 +1113,13 @@
 		fills : {
 			// 'pinkColor': '#ff99ff',
 			// 'orangeColor': '#ff6600',
-			'redColor' : '#ff0000',
+			'redColor' : 'rgb(137, 254, 0)',
 			// 'greenColor': '#00cc00',
 			// 'grayColor': '#cccccc',
 			// 'yellowColor': '#ffcc00',
 			//'whiteColor': '#ffffff',
 			// 'neutralColor': '#eeeeee',
-			defaultFill : 'green'
+			defaultFill : 'rgb(0, 165, 121)'
 		}
 	});
 
